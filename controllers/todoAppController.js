@@ -128,7 +128,8 @@ const addTodo = async (req, res) => {
       todo: {
         Todo_ID: newTodo[0].Todo_ID,
         Todo: todoText,
-        User_ID: reference
+        User_ID: reference,
+        IsCompleted: newTodo[0].IsCompleted
       }
     });
   }
