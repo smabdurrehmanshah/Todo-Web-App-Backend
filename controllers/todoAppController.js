@@ -214,16 +214,16 @@ const deleteTodo = async (req, res) => {
 
 const editTodo = async (req, res) => {
   try {
-    const {todoId, newTodoText} = req.body;
+    const {todoId, newTodoText, IsCompleted} = req.body;
 
-    if(!todoId || !newTodoText) {
+    if(!todoId || !newTodoText || !IsCompleted) {
       return res.status(400).send({
         success: false,
         message: "Please provide todoId and newTodoText"
       });
     }
 
-    const result = db.query('UPDATE todos SET Todo = ? WHERE Todo_ID = ?', [newTodoText, todoId ]);
+    const result = db.query('UPDATE todos SET Todo = ?, IsCompleted = ? WHERE Todo_ID = ?', [newTodoText,IsCompleted, todoId ]);
 
     if (result.affectedRows === 0) {
       return res.status(400).send({
@@ -235,7 +235,10 @@ const editTodo = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Todo updated successfully",
-      updatedTodoText: newTodoText
+      updatedTodo: {
+        newTodoText,
+        IsCompleted
+      }
     });
   }
   catch (error) {
