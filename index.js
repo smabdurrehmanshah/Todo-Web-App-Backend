@@ -20,23 +20,22 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello from the server");
 });
 
-module.exports = app;
-
 // port
-// const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
 // conditionally listen
-// mysqlPool
-//   .query("SELECT 1")
-//   .then(() => {
-//     // MY SQL
-//     console.log("MY SQL DB Connected");
 
-//     // listen
-//     app.listen(PORT, () => {
-//       console.log(`Server Running at ${PORT}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
+mysqlPool
+  .query("SELECT 1")
+  .then(() => {
+    // MY SQL
+    console.log("MY SQL DB Connected");
+
+    // listen
+    app.listen(PORT, () => {
+      console.log(`Server Running at ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
