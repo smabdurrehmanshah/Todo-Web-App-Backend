@@ -217,7 +217,7 @@ const editTodo = async (req, res) => {
   try {
     const {todoId, newTodoText, IsCompleted} = req.body;
 
-    if(!todoId || !newTodoText || !IsCompleted) {
+    if(!todoId || !newTodoText) {
       return res.status(400).send({
         success: false,
         message: "Please provide todoId and newTodoText"
